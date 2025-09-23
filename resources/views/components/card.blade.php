@@ -20,8 +20,8 @@
                 </div>
             </div>
             <a href="/posts/{{ $post->id }}">
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-r-lg cursor-pointer"
-                    src="{{ $post->image == "0" ? "https://flowbite.com/docs/images/blog/image-4.jpg" : asset("storage/" . $post->image) }}"
+                <img class="object-cover w-full  rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-r-lg cursor-pointer"
+                    src="{{ $post->image == "0" ? "https://flowbite.com/docs/images/blog/image-1.jpg" : asset("storage/" . $post->image) }}"
                     alt="">
             </a>
         </div>

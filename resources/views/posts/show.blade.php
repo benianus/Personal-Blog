@@ -10,7 +10,7 @@
                                 {{$post->title}}
                             </h5>
                             <img class="object-cover w-full rounded-t-lg md:h-auto md:w-full md:rounded-lg cursor-pointer my-6"
-                                src="https://flowbite.com/docs/images/blog/image-4.jpg" alt="">
+                                src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="">
                             <p class="mb-3 font-normal text-gray-700 dark:text-black">{{ $post->body }}</p>
                             <div class="flex items-center text-gray-500">
                                 <p class="mx-2">by
