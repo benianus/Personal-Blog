@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $posts = Post::all();
 
         $posts->each(
-            function ($post) use ($categories) {
+            function ($post) {
                 $post->categories()->attach(
                     // $categories->each(function ($category) {})->pluck('id')
                     random_int(1, 6)
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         );
 
         $posts->each(
-            function ($post) use ($tags) {
+            function ($post) {
                 $post->tags()->attach(
                     random_int(1, 10)
                 );

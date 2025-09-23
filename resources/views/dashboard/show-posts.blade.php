@@ -35,7 +35,7 @@
                         @empty
                             <div class="py-12 max-w-7xl m-auto">
                                 <div class="bg-white overflow-hidden w-full shadow-sm sm:rounded-lg flex justify-start">
-                                    <h1 class="p-6">Not Posts Founded !!</h1>
+                                    <h1 class="p-4">Not Posts Founded !!</h1>
                                 </div>
                             </div>
                         @endforelse

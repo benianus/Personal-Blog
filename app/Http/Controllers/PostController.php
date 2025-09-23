@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use Carbon\Carbon;
-use App\Models\Tag;
-use App\Models\Post;
 use App\Models\Category;
-use Carbon\Traits\Timestamp;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\CreatePostRequest;
 
 class PostController extends Controller
 {
@@ -51,11 +50,13 @@ class PostController extends Controller
     public function create()
     {
         //
+
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('posts.create', [
             'categories' => $categories,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
@@ -64,7 +65,7 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        //validation using Request
+        // validation using Request
         $attributes = $request->validated();
 
         // get the file from the request and store it in the public folder
@@ -76,7 +77,7 @@ class PostController extends Controller
             'body' => $attributes['body'],
             'image' => $path,
             'published_at' => Carbon::now()->toDateTimeString(),
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
 
         // get tag and category ids
@@ -113,10 +114,11 @@ class PostController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $post = Post::where('id', '=', $post->id)->first();
+
         return view('posts.edit', [
             'post' => $post,
             'categories' => $categories,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
@@ -125,7 +127,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //validation using Request
+        // validation using Request
         $attributes = $request->validated();
 
         // get the file from the request and store it in the public folder
@@ -137,7 +139,7 @@ class PostController extends Controller
                 'title' => $attributes['title'],
                 'body' => $attributes['body'],
                 'image' => $path,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
             ]);
 
         // finally redirect the user to the posts dashboard
@@ -150,12 +152,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        // dd($post->id);
-
         Post::where('id', '=', $post->id)
             ->delete();
 
-        return redirect()->route('dashboard-posts');    
+        return redirect()->route('dashboard-posts');
     }
 
     public function dashboard()
@@ -166,8 +166,9 @@ class PostController extends Controller
     public function showPosts()
     {
         $posts = Post::with(['categories', 'user', 'tags'])->latest()->paginate(5);
+
         return view('dashboard.show-posts', [
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 
